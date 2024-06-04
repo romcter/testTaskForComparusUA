@@ -18,19 +18,19 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-		entityManagerFactoryRef = "userEntityManagerFactory",
-		transactionManagerRef = "userTransactionManager",
+		entityManagerFactoryRef = "secondDbEntityManagerFactory",
+		transactionManagerRef = "secondDbTransactionManager",
 		basePackages = { "com.example.testtaskforcomparusua.secondDB.repository" }
 )
 public class SecondDBSourceConfig {
 	@Bean(name="secondDbDataSource")
 	@ConfigurationProperties(prefix="spring.second-db.datasource")
-	public DataSource userDataSource() {
+	public DataSource secondDbDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
 	@Bean(name = "secondDbEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean userEntityManagerFactory(EntityManagerFactoryBuilder builder,
+	public LocalContainerEntityManagerFactoryBean secondDbEntityManagerFactory(EntityManagerFactoryBuilder builder,
 																		   @Qualifier("secondDbDataSource") DataSource userDataSource) {
 		return builder
 				.dataSource(userDataSource)
@@ -39,7 +39,7 @@ public class SecondDBSourceConfig {
 	}
 
 	@Bean(name = "secondDbTransactionManager")
-	public PlatformTransactionManager userTransactionManager(
+	public PlatformTransactionManager secondDbTransactionManager(
 			@Qualifier("secondDbEntityManagerFactory") EntityManagerFactory userEntityManagerFactory) {
 		return new JpaTransactionManager(userEntityManagerFactory);
 	}

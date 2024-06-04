@@ -1,0 +1,26 @@
+server:
+  port: 9090
+
+spring:
+  first-db:
+    datasource:
+      jdbc-url: jdbc:postgresql://localhost:5432/first_database?createDatabaseIfNotExist=true
+      username: postgres
+      password: password
+
+  second-db:
+    datasource:
+      jdbc-url: jdbc:postgresql://localhost:5432/second_database?createDatabaseIfNotExist=true
+      username: postgres
+      password: password
+
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
