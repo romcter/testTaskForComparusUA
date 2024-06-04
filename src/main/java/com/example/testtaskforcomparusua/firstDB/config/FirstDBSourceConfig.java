@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -27,17 +28,17 @@ import javax.sql.DataSource;
 )
 public class FirstDBSourceConfig {
 	
-	@Bean(name="accountDataSource")
+	@Bean(name="firstDbDataSource")
 	@Primary
 	@ConfigurationProperties(prefix="spring.first-db.datasource")
 	public DataSource accountDataSource() {
 	    return DataSourceBuilder.create().build();
 	}
-	
+
 	@Primary
-	@Bean(name = "accountEntityManagerFactory")
+	@Bean(name = "firstDbEntityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean accountEntityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("accountDataSource") DataSource accountDataSource) {
+			@Qualifier("firstDbDataSource") DataSource accountDataSource) {
 		return builder
 				.dataSource(accountDataSource)
 				.packages("com.example.testtaskforcomparusua.entity")
@@ -46,7 +47,7 @@ public class FirstDBSourceConfig {
 	
 	@Bean(name = "accountTransactionManager")
 	public PlatformTransactionManager accountTransactionManager(
-			@Qualifier("accountEntityManagerFactory") EntityManagerFactory accountEntityManagerFactory) {
+			@Qualifier("firstDbEntityManagerFactory") EntityManagerFactory accountEntityManagerFactory) {
 		return new JpaTransactionManager(accountEntityManagerFactory);
 	}
 

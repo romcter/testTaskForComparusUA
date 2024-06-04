@@ -23,24 +23,24 @@ import javax.sql.DataSource;
 		basePackages = { "com.example.testtaskforcomparusua.secondDB.repository" }
 )
 public class SecondDBSourceConfig {
-	@Bean(name="userDataSource")
+	@Bean(name="secondDbDataSource")
 	@ConfigurationProperties(prefix="spring.second-db.datasource")
 	public DataSource userDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
-	@Bean(name = "userEntityManagerFactory")
+	@Bean(name = "secondDbEntityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean userEntityManagerFactory(EntityManagerFactoryBuilder builder,
-																		   @Qualifier("userDataSource") DataSource userDataSource) {
+																		   @Qualifier("secondDbDataSource") DataSource userDataSource) {
 		return builder
 				.dataSource(userDataSource)
 				.packages("com.example.testtaskforcomparusua.entity")
 				.build();
 	}
 
-	@Bean(name = "userTransactionManager")
+	@Bean(name = "secondDbTransactionManager")
 	public PlatformTransactionManager userTransactionManager(
-			@Qualifier("userEntityManagerFactory") EntityManagerFactory userEntityManagerFactory) {
+			@Qualifier("secondDbEntityManagerFactory") EntityManagerFactory userEntityManagerFactory) {
 		return new JpaTransactionManager(userEntityManagerFactory);
 	}
 
