@@ -19,6 +19,5 @@ public class ClientDataController {
     @GetMapping
     public List<User> findFromDatabase() throws Exception {
         return userService.getUsers();
-//        return null;
     }
 }

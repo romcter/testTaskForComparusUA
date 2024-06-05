@@ -4,10 +4,7 @@ package com.example.testtaskforcomparusua.service;
 import com.example.testtaskforcomparusua.config.DataSourceConfig;
 import com.example.testtaskforcomparusua.entity.User;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -19,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-//@ConfigurationProperties(prefix = "data-sources")
 public class UserService {
 
     private DataSourceConfig dataSourceConfig;
