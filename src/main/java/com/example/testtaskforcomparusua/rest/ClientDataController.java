@@ -1,7 +1,7 @@
 package com.example.testtaskforcomparusua.rest;
 
 import com.example.testtaskforcomparusua.entity.User;
-import com.example.testtaskforcomparusua.service.ClientMasterService;
+import com.example.testtaskforcomparusua.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientDataController {
 
-    private ClientMasterService clientMasterService;
+    private UserService userService;
 
     @GetMapping
-    public List<User> findFromDatabase() {
-        return clientMasterService.getClientNames();
+    public List<User> findFromDatabase() throws Exception {
+        return userService.getUsers();
+//        return null;
     }
 }
